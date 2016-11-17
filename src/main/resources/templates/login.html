@@ -1,8 +1,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout">
+      layout:decorator="layout"
+      xmlns:th="http://www.thymeleaf.org">
 
 <div layout:fragment="content">
+
+   <div th:if="#{registered}" class="alert alert-success" role="alert"> <strong>Well done!</strong> You successfully read this important alert message. </div>
+
    login bura
 </div>
 

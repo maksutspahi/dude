@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Created by maksutspahi on 17/11/16.
@@ -23,6 +24,11 @@ public class MainController {
     @RequestMapping("/login")
     public String boot(Model model) {
         return "login";
+    }
+
+    @RequestMapping(value = "/signup", method = RequestMethod.GET)
+    public String signup(Model model) {
+        return "signup";
     }
 
 }
