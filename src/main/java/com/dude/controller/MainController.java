@@ -21,8 +21,13 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping("/boot")
+    @RequestMapping("/login")
     public String boot(Model model) {
-        return "boot";
+        return "login";
+    }
+
+    @RequestMapping("/signup")
+    public String signup(Model model) {
+        return "signup";
     }
 }
