@@ -1,5 +1,7 @@
 package com.dude.controller;
 
+import com.dude.bean.Database;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class MainController {
 
+    @Autowired
+    private Database bean;
+
     @RequestMapping("/index")
     public String greeting(Model model) {
-        model.addAttribute("name", "ANIL");
+        model.addAttribute("name", bean.selectFromDual());
         return "index";
     }
 
