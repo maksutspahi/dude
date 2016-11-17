@@ -1,13 +1,19 @@
 package com.dude.entity;
 
-import java.io.Serializable;
-import javax.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.util.Collection;
 
 /**
  * Created by can.yegane on 17/11/16.
  */
 @Entity
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue
@@ -19,7 +25,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    protected User() {
+    public User() {
     }
 
     public User(String username, String password) {
@@ -29,6 +35,31 @@ public class User {
 
     public String getUsername() {
         return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
     public String getPassword() {

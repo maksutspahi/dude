@@ -1,7 +1,9 @@
-package com.dude.config;
+package com.dude;
 
+import com.dude.config.DudeUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,17 +15,21 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private DudeUserDetailsService dudeUserDetailsService;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/signup","/js/**","/fonts/**","/css/**").permitAll()
+                .antMatchers("/", "/signup", "/js/**", "/fonts/**", "/css/**").permitAll()
                 .anyRequest().authenticated()
-                    .and()
+                .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
-                    .and()
+                .and()
                 .logout()
                 .permitAll();
     }
@@ -31,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
+                .userDetailsService(dudeUserDetailsService)
+                .passwordEncoder(new ShaPasswordEncoder(512));
     }
 }

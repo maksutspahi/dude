@@ -22,7 +22,6 @@ public class MainController {
 
     @RequestMapping("/login")
     public String boot(Model model) {
-        userRepository.findByUserName(model.)
         return "login";
     }
 
