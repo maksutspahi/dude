@@ -15,4 +15,9 @@ public class MainController {
         model.addAttribute("name", "ANIL");
         return "index";
     }
+
+    @RequestMapping("/boot")
+    public String boot(Model model) {
+        return "boot";
+    }
 }
